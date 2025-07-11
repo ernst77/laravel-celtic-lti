@@ -49,7 +49,7 @@ class LtiTool extends LTI\Tool
         $this->rsaKey = config('lti.lti13.rsa_private_key', '');
         $this->requiredScopes = config('lti.lti13.required_scopes', []);
 
-        if (config('lti.lti13.auto_register_deployment_id', false)) {
+        if (!app()->runningInConsole() && config('lti.lti13.auto_register_deployment_id', false)) {
             $this->createDeploymentIdFromExistingPlatform();
         }
     }
